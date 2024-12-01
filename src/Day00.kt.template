@@ -14,8 +14,8 @@ fun main() {
 
     // Or read a large test input from the `src/day**/Day**_test.txt` file:
     val testInput = readInput("day**/Day**_test")
-    check(part1(testInput) == 1)
-    check(part2(testInput) == 1)
+    // *1*
+    // *2*
 
     // Read the input from the `src/day**/Day**.txt` file.
     val input = readInput("day**/Day**")
