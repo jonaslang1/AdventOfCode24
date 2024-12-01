@@ -14,7 +14,7 @@ fun main() {
         val distances = rightNumbers.zip(leftNumbers).map { (right, left) -> abs(right - left) }
         distances.println()
         val sum = distances.sum()
-        sum.println()
+
         return sum
     }
 
@@ -33,7 +33,6 @@ fun main() {
         val occurrencesRight = createRepeatedValuesHashMap(rightNumbers)
 
         val similarityScore = leftNumbers.sumOf { it * (occurrencesRight[it] ?: 0) }
-        similarityScore.println()
 
         return similarityScore
     }
