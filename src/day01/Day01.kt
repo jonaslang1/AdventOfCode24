@@ -39,12 +39,15 @@ fun main() {
 
 
     // Or read a large test input from the `src/Day01_test.txt` file:
+    println("\nExample test ------------------------------------------------------------------------------------------")
     val testInput = readInput("day01/Day01_test")
     check(part1(testInput) == 11)
     check(part2(testInput) == 31)
 
     // Read the input from the `src/Day01.txt` file.
     val input = readInput("day01/Day01")
+    println("\nPart 1 ------------------------------------------------------------------------------------------------")
     part1(input).println()
+    println("\nPart 2 ------------------------------------------------------------------------------------------------")
     part2(input).println()
 }
