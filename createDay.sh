@@ -28,4 +28,7 @@ curl "$url/input" \
   --compressed > "src/day$dayStr/Day$dayStr.txt"
 echo "Input file created: src/day$dayStr/Day$dayStr.txt with $(wc --lines < "src/day$dayStr/Day$dayStr.txt") lines"
 
+# Add the files to git
 git add "src/day$dayStr/Day$dayStr.kt"
+git add "src/day$dayStr/Day$dayStr.txt"
+git add "src/day$dayStr/Day${dayStr}_test.txt"
