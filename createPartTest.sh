@@ -34,7 +34,7 @@ example_input=$(echo "$actual_part" | awk '/<pre><code>/,/<\/code><\/pre>/' | se
 if [ "$part" -eq 1 ]; then
   printf "Example input:\n%s\n" "$example_input"
   echo "$example_input" > "src/day$dayStr/Day${dayStr}_test.txt"
-  echo "Example input file created: src/day$dayStr/Day${dayStr}_test.txt with $(wc --lines < "src/day$dayStr/Day${dayStr}_test.txt") lines"
+  echo "Example input file created: src/day$dayStr/Day${dayStr}_test.txt with $(wc -l < "src/day$dayStr/Day${dayStr}_test.txt" | tr -d ' ') lines"
 fi
 # Extract the example result
 example_result=$(echo "$actual_part" | awk '/<p>/,/<\/p>/p' | sed -n 's/.*<code><em>\(.*\)<\/em><\/code>.*/\1/p')

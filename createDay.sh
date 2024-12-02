@@ -20,18 +20,18 @@ mkdir "src/day$dayStr"
 
 # Create the template code file
 cp "src/Day00.kt.template" "src/day$dayStr/Day$dayStr.kt"
-sed -i "s/\*\*/$dayStr/g" "src/day$dayStr/Day$dayStr.kt"
+sed -i '' "s/\*\*/$dayStr/g" "src/day$dayStr/Day$dayStr.kt"
 echo "Code file created: src/day$dayStr/Day$dayStr.kt"
-
-# Create the example test
-./createPartTest.sh "$day" 1
 
 # Get the real input for the day
 curl "$url/input" \
   -H 'accept: text/plain' \
   -H "cookie: session=$SESSION_COOKIE" \
   --compressed > "src/day$dayStr/Day$dayStr.txt"
-echo "Input file created: src/day$dayStr/Day$dayStr.txt with $(wc --lines < "src/day$dayStr/Day$dayStr.txt") lines"
+echo "Input file created: src/day$dayStr/Day$dayStr.txt with $(wc -l < "src/day$dayStr/Day$dayStr.txt" | tr -d ' ') lines"
+
+# Create the example test
+./createPartTest.sh "$day" 1
 
 # Add the files to git
 git add "src/day$dayStr/Day$dayStr.kt"
