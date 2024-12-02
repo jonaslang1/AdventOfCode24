@@ -34,9 +34,11 @@ example_input=$(echo "$actual_part" | awk '/<pre><code>/,/<\/code><\/pre>/' | se
 if [ "$part" -eq 1 ]; then
   printf "Example input:\n%s\n" "$example_input"
   echo "$example_input" > "src/day$dayStr/Day${dayStr}_test.txt"
+  echo "Example input file created: src/day$dayStr/Day${dayStr}_test.txt with $(wc --lines < "src/day$dayStr/Day${dayStr}_test.txt") lines"
 fi
 # Extract the example result
 example_result=$(echo "$actual_part" | awk '/<p>/,/<\/p>/p' | sed -n 's/.*<code><em>\(.*\)<\/em><\/code>.*/\1/p')
 echo "Example result for part $part: $example_result"
+echo "Result check added for part $part"
 
 sed -i '' "s/\/\/ \*$part\*/check(part$part(testInput) == $example_result)/g" "src/day$dayStr/Day$dayStr.kt"
