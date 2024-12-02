@@ -7,8 +7,10 @@ url="https://adventofcode.com/2024/day/$day"
 
 part=$2
 
+source .env
+
 # Get the example for the day
-html_content=$(curl -s "$url")
+html_content=$(curl -s -b "session=$SESSION_COOKIE" "$url")
 first_part=$(echo "$html_content" | awk '/<article class="day-desc"><h2>/,/<\/article>/')
 second_part=$(echo "$html_content" | awk '/<article class="day-desc"><h2 id="part2">/,/<\/article>/')
 
@@ -20,8 +22,12 @@ fi
 
 # Extract the example input
 example_input=$(echo "$actual_part" | awk '/<pre><code>/,/<\/code><\/pre>/' | sed 's/<[^>]*>//g')
-echo "$example_input" > "src/day$dayStr/Day${dayStr}_test.txt"
+if [ "$part" -eq 1 ]; then
+  printf "Example input:\n%s\n" "$example_input"
+  echo "$example_input" > "src/day$dayStr/Day${dayStr}_test.txt"
+fi
 # Extract the example result
 example_result=$(echo "$actual_part" | awk '/<p>/,/<\/p>/p' | sed -n 's/.*<code><em>\(.*\)<\/em><\/code>.*/\1/p')
+echo "Example result for part $part: $example_result"
 
 sed -i "s/\/\/ \*$part\*/check(part$part(testInput) == $example_result)/g" "src/day$dayStr/Day$dayStr.kt"

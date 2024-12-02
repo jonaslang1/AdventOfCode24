@@ -12,10 +12,12 @@ fun main() {
         return input.size
     }
 
-    // Or read a large test input from the `src/day**/Day**_test.txt` file:
+    // Read the test input from the `src/day**/Day**_test.txt` file:
     println("\nExample test ------------------------------------------------------------------------------------------")
     val testInput = readInput("day**/Day**_test")
+    println("Example test part 1 -----------------------------------------------------------------------------------")
     // *1*
+    println("Example test part 2 -----------------------------------------------------------------------------------")
     // *2*
 
     // Read the input from the `src/day**/Day**.txt` file.
