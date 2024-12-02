@@ -7,6 +7,15 @@ url="https://adventofcode.com/2024/day/$day"
 
 part=$2
 
+if ! [[ "$day" =~ ^[0-9]+$ ]]; then
+  echo "Error: Day (parameter 1) must be an integer."
+  exit 1
+fi
+if ! [[ "$part" =~ ^[0-9]+$ ]]; then
+  echo "Error: Part (parameter 2) must be an integer."
+  exit 1
+fi
+
 source .env
 
 # Get the example for the day
@@ -30,4 +39,4 @@ fi
 example_result=$(echo "$actual_part" | awk '/<p>/,/<\/p>/p' | sed -n 's/.*<code><em>\(.*\)<\/em><\/code>.*/\1/p')
 echo "Example result for part $part: $example_result"
 
-sed -i "s/\/\/ \*$part\*/check(part$part(testInput) == $example_result)/g" "src/day$dayStr/Day$dayStr.kt"
+sed -i '' "s/\/\/ \*$part\*/check(part$part(testInput) == $example_result)/g" "src/day$dayStr/Day$dayStr.kt"

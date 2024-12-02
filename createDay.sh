@@ -8,6 +8,11 @@ dayStr=$(printf "%02d" "$day")
 
 url="https://adventofcode.com/2024/day/$day"
 
+if ! [[ "$day" =~ ^[0-9]+$ ]]; then
+  echo "Error: Day (parameter 1) must be an integer."
+  exit 1
+fi
+
 source .env
 
 # Create the package folder
