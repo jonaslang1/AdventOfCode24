@@ -41,11 +41,7 @@ fun main() {
                 val (a, b) = instruction.substring(4, instruction.length - 1).split(",").map { it.toInt() }
                 if(isDo) a * b else 0
             } else if (instruction.matches("(do|don't)\\(\\)".toRegex())) {
-                isDo = if (instruction == "do()") {
-                    true
-                } else {
-                    false
-                }
+                isDo = instruction == "do()"
                 0
             } else {
                 0
