@@ -1,11 +1,5 @@
 package day04
 
-import org.jetbrains.kotlinx.multik.api.*
-import org.jetbrains.kotlinx.multik.api.mk
-import org.jetbrains.kotlinx.multik.ndarray.operations.filter
-import org.jetbrains.kotlinx.multik.ndarray.operations.find
-import org.jetbrains.kotlinx.multik.ndarray.operations.forEach
-import org.jetbrains.kotlinx.multik.ndarray.operations.map
 import println
 import readInput
 
@@ -34,8 +28,6 @@ fun main() {
     }
 
     fun part1(input: List<String>): Int {
-//        val matrix = mk.d2arrayIndices(input.first().length, input.size) { i, j -> input[j][i].code }
-//        matrix.println()
         val xDimension = input.first().length
         val yDimension = input.size
         var count = 0
@@ -57,11 +49,8 @@ fun main() {
         for (i in 0 until xDimension) {
             for (j in 0 until yDimension) {
                 if (input[j][i] == 'A') {
-                    val x = i
-                    val y = j
-                    // println("X found at: ($i, $j)")
-                    if (x+1 < xDimension && x-1 >= 0 && y+1 < yDimension && y-1 >= 0) {
-                        val box = "" + input[y-1][x-1] + input[y-1][x+1] + input[y+1][x-1] + input[y+1][x+1]
+                    if (i + 1 < xDimension && i - 1 >= 0 && j + 1 < yDimension && j - 1 >= 0) {
+                        val box = "" + input[j - 1][i - 1] + input[j - 1][i + 1] + input[j + 1][i - 1] + input[j + 1][i + 1]
                         //  M left, up                M left, down              S right, up               S right, down
                         //  S left, up                S left, down              M right, up               M right, down
                         //  M left, up                S left, down              M right, up               S right, down
