@@ -6,7 +6,8 @@ import java.util.Collections.swap
 
 fun main() {
     fun validateRules(update: List<Int>, rules: List<List<Int>>): Boolean {
-        rules.forEach { rule ->
+        rules.filter { update.contains(it[0]) && update.contains(it[1]) }
+            .forEach { rule ->
             val indexSuccessor = update.indexOf(rule[1])
             val indexPredecessor = update.indexOf(rule[0])
             if (indexSuccessor != -1 && indexPredecessor != -1 && indexSuccessor < indexPredecessor)
