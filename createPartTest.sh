@@ -30,14 +30,14 @@ else
 fi
 
 # Extract the example input
-example_input=$(echo "$actual_part" | awk '/<pre><code>/,/<\/code><\/pre>/' | sed 's/<[^>]*>//g')
+example_input=$(echo "$actual_part" | awk '/<pre><code>/,/<\/code><\/pre>/' | sed "s/<[^>]*>//g")
 if [ "$part" -eq 1 ]; then
   printf "Example input:\n%s\n" "$example_input"
   echo "$example_input" > "src/day$dayStr/Day${dayStr}_test.txt"
   echo "Example input file created: src/day$dayStr/Day${dayStr}_test.txt with $(wc -l < "src/day$dayStr/Day${dayStr}_test.txt" | tr -d ' ') lines"
 fi
 # Extract the example result
-example_result=$(echo "$actual_part" | awk '/<p>/,/<\/p>/p' | sed -n 's/.*<code><em>\(.*\)<\/em><\/code>.*/\1/p' | tail -n 1)
+example_result=$(echo "$actual_part" | awk '/<p>/,/<\/p>/p' | sed -n "s/.*<code><em>\(.*\)<\/em><\/code>.*/\1/p" | tail -n 1)
 echo "Example result for part $part: $example_result"
 echo "Result check added for part $part"
 
