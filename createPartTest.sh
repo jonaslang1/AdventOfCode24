@@ -37,7 +37,7 @@ if [ "$part" -eq 1 ]; then
   echo "Example input file created: src/day$dayStr/Day${dayStr}_test.txt with $(wc -l < "src/day$dayStr/Day${dayStr}_test.txt" | tr -d ' ') lines"
 fi
 # Extract the example result
-example_result=$(echo "$actual_part" | awk '/<p>/,/<\/p>/p' | sed -n 's/.*<code><em>\(.*\)<\/em><\/code>.*/\1/p')
+example_result=$(echo "$actual_part" | awk '/<p>/,/<\/p>/p' | sed -n 's/.*<code><em>\(.*\)<\/em><\/code>.*/\1/p' | tail -n 1)
 echo "Example result for part $part: $example_result"
 echo "Result check added for part $part"
 
