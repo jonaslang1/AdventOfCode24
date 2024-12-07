@@ -4,24 +4,17 @@ import println
 import readInput
 
 fun main() {
-    fun calculateAndCheckPlusMultiply(operants: List<Long>, result: Long): Boolean {
+    fun calculateAndCheckPlusMultiplyConcat(operants: List<Long>, result: Long, allowConcat: Boolean = false): Boolean {
         if (operants.size == 1) return operants[0] == result
         val plusResult = operants[0] + operants[1]
-        if (plusResult <= result) if (calculateAndCheckPlusMultiply(listOf(plusResult, *operants.subList(2, operants.size).toTypedArray()), result)) return true
+        if (plusResult <= result &&
+            calculateAndCheckPlusMultiplyConcat(listOf(plusResult, *operants.subList(2, operants.size).toTypedArray()), result, allowConcat = allowConcat)) return true
         val multiplyResult = operants[0] * operants[1]
-        if (multiplyResult <= result) if (calculateAndCheckPlusMultiply(listOf(multiplyResult, *operants.subList(2, operants.size).toTypedArray()), result)) return true
-        return false
-    }
-
-    fun calculateAndCheckPlusMultiplyConcat(operants: List<Long>, result: Long): Boolean {
-        if (operants.size == 1) return operants[0] == result
-        val plusResult = operants[0] + operants[1]
-        if (plusResult <= result) if (calculateAndCheckPlusMultiplyConcat(listOf(plusResult, *operants.subList(2, operants.size).toTypedArray()), result)) return true
-        val multiplyResult = operants[0] * operants[1]
-        if (multiplyResult <= result) if (calculateAndCheckPlusMultiplyConcat(listOf(multiplyResult, *operants.subList(2, operants.size).toTypedArray()), result)) return true
+        if (multiplyResult <= result &&
+            calculateAndCheckPlusMultiplyConcat(listOf(multiplyResult, *operants.subList(2, operants.size).toTypedArray()), result, allowConcat = allowConcat)) return true
         val concatResult = (operants[0].toString() + operants[1].toString()).toLong()
-        if (concatResult <= result) if (calculateAndCheckPlusMultiplyConcat(listOf(concatResult, *operants.subList(2, operants.size).toTypedArray()), result)) return true
-        return false
+        return allowConcat && concatResult <= result &&
+                calculateAndCheckPlusMultiplyConcat(listOf(concatResult, *operants.subList(2, operants.size).toTypedArray()), result, allowConcat = allowConcat)
     }
 
     fun parseInput(input: List<String>): Pair<List<Long>, List<List<Long>>> {
@@ -32,13 +25,13 @@ fun main() {
 
     fun part1(input: List<String>): Long {
         val (results, operantsList) = parseInput(input)
-        return results.filterIndexed { index, _ -> calculateAndCheckPlusMultiply(operantsList[index], results[index]) }
+        return results.filterIndexed { index, _ -> calculateAndCheckPlusMultiplyConcat(operantsList[index], results[index]) }
             .sum()
     }
 
     fun part2(input: List<String>): Long {
         val (results, operantsList) = parseInput(input)
-        return results.filterIndexed { index, _ -> calculateAndCheckPlusMultiplyConcat(operantsList[index], results[index]) }
+        return results.filterIndexed { index, _ -> calculateAndCheckPlusMultiplyConcat(operantsList[index], results[index], allowConcat = true) }
             .sum()
     }
 
