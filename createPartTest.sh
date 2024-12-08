@@ -30,7 +30,7 @@ else
 fi
 
 # Extract the example input
-example_input=$(echo "$actual_part" | awk '/<pre><code>/,/<\/code><\/pre>/' | sed "s/<[^>]*>//g")
+example_input=$(echo "$actual_part" | awk '/For example:<\/p>/,/<\/code><\/pre>/' | sed "s/<[^>]*>//g" | tail -n +2)
 if [ "$part" -eq 1 ]; then
   printf "Example input:\n%s\n" "$example_input"
   echo "$example_input" > "src/day$dayStr/Day${dayStr}_test.txt"
